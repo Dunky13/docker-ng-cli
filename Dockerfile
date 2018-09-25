@@ -3,7 +3,7 @@
 #or specify angular-cli version
 #docker build --build-arg NG_CLI_VERSION=6.2.3
 
-FROM node:stretch
+FROM node:alpine
 
 #alternative to reduce size instead of alpine, but does not
 #include build tools for native compilation of npm packages
