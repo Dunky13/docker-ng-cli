@@ -9,7 +9,7 @@ FROM node:alpine
 #include build tools for native compilation of npm packages
 #FROM node:8-slim
 
-MAINTAINER trion development GmbH "info@trion.de"
+MAINTAINER Marc Went "marc@went.io"
 
 ARG NG_CLI_VERSION=6.2.3
 ARG USER_HOME_DIR="/tmp"
