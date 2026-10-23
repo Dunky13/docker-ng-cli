@@ -4,7 +4,7 @@ Docker image for Angular CLI to use as build container.
 
 Image on dockerhub: https://hub.docker.com/r/trion/ng-cli/
 
-Currently this image uses node 9 (npm 5) and Debian stretch as base distribution.
+This image uses Node.js 26.12.1 on Alpine, pinned by image digest.
 
 ## Example usage
 ```
