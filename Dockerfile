@@ -3,7 +3,7 @@
 #or specify angular-cli version
 #docker build --build-arg NG_CLI_VERSION=6.2.3
 
-FROM node:alpine
+FROM node:26.12.1-alpine@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a64c74f80497af48797
 
 #alternative to reduce size instead of alpine, but does not
 #include build tools for native compilation of npm packages
@@ -23,13 +23,12 @@ ENV HOME "$USER_HOME_DIR"
 # npm 5 uses different userid when installing packages, as workaround su to node when installing
 # see https://github.com/npm/npm/issues/16766
 RUN set -xe \
-    && curl -sL https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 > /usr/bin/dumb-init \
-    && chmod +x /usr/bin/dumb-init \
+    && apk add --no-cache dumb-init \
     && mkdir -p $USER_HOME_DIR \
     && chown $USER_ID $USER_HOME_DIR \
     && chmod a+rw $USER_HOME_DIR \
     && chown -R node /usr/local/lib /usr/local/include /usr/local/share /usr/local/bin \
-    && (cd "$USER_HOME_DIR"; su node -c "npm install -g @angular/cli@$NG_CLI_VERSION; npm install -g yarn; chmod +x /usr/local/bin/yarn; npm cache clean --force")
+    && (cd "$USER_HOME_DIR"; su node -c "npm install -g @angular/cli@$NG_CLI_VERSION yarn@1.22.22 && chmod +x /usr/local/bin/yarn && npm cache clean --force")
 
 #not declared to avoid anonymous volume leak
 #VOLUME "$USER_HOME_DIR/.cache/yarn"
